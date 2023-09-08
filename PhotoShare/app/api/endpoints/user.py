@@ -111,7 +111,7 @@ def upload_avatar(file: UploadFile = File(), user: User = Depends(get_current_us
     print(public_id)
     image = CloudinaryService.upload_avater(file=file.file, public_id=public_id)
     version = image.get('version')
-    url = CloudinaryService.get_avatar(public_id=public_id, version=version)
+    url = CloudinaryService.get_avatar_url(public_id=public_id, version=version)
     user.avatar = url
     user = update_user(user=user, session=session)
     return user

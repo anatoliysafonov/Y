@@ -3,24 +3,21 @@ from datetime import datetime
 from pydantic import BaseModel, EmailStr
 
 
-class UserLoginModel(BaseModel):
+class BaseUserModel(BaseModel):
     email: EmailStr = 'user@gmail.com'
     password: str = 'qwerty'
 
+class UserLoginModel(BaseUserModel):
+    ...
 
-class UserRegisterModel(BaseModel):
-    email: EmailStr = 'user@gmail.com'
-    password: str = 'qwerty'
+class UserRegisterModel(BaseUserModel):
     username: str
     first_name: str
     last_name: str
 
-
-class UserProfileModel(BaseModel):
-    email: EmailStr
+class UserProfileModel(BaseUserModel):
     first_name: str | None
     last_name: str | None
-    username: str | None
     created_at: datetime
     avatar: str
     uploaded_photos: int
@@ -28,7 +25,6 @@ class UserProfileModel(BaseModel):
 
 class UserRespond(BaseModel):
     id: int
-    username: str
     email: EmailStr
     username: str | None
     first_name: str | None
@@ -36,6 +32,9 @@ class UserRespond(BaseModel):
     uploaded_photos: int
     avatar: str
     role: str
+
+    class Config:                                                                                                # noqa
+        from_attributes = True
 
 
 class TokenResponse(BaseModel):
