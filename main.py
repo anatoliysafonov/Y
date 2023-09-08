@@ -7,6 +7,7 @@ from PhotoShare.app.api.endpoints.authentication import router_auth
 from PhotoShare.app.api.endpoints.comments import router_comments
 from PhotoShare.app.api.endpoints.user import router_user
 from PhotoShare.app.core.database import get_db
+from PhotoShare.app.models.base import Base
 from PhotoShare.app.services.redis import RedisService
 
 app = FastAPI(swagger_ui_parameters={"operationsSorter": "method"})

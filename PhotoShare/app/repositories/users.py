@@ -108,7 +108,7 @@ def user_login(email: str, session: Session):
     refresh_token = None  # noqa
     user = get_user_by_email(email, session)
     if user:
-        if user.banned:
+        if user.blocked:
             raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail='Operation not permitted')
         if not user.confirmed:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Your email not confirmed')

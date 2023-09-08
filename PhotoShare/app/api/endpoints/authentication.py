@@ -136,7 +136,7 @@ def logout(token: HTTPAuthorizationCredentials = Depends(oauth2_scheme),
     return {'token_revoked': token_revoked}
 
 
-@router_auth.patch("/banned/{email}", status_code=status.HTTP_200_OK, dependencies=[Depends(Roles(['admin']))])
+@router_auth.patch("/block_user/{email}", status_code=status.HTTP_200_OK, dependencies=[Depends(Roles(['admin']))])
 def banned_user(email: str, session: Session = Depends(get_db)):
     """
     Функція banned_user використовується для встановлення заборони доступу до додатку певного користувача.
@@ -151,6 +151,6 @@ def banned_user(email: str, session: Session = Depends(get_db)):
     user = user_repo.get_user_by_email(email=email, session=session)
     if user is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'User not found')
-    user.banned = True
+    user.blocked = True
     user = user_repo.update_user(user, session)
     return {f'user {user.email}': 'BANNED'}

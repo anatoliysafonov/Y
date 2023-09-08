@@ -34,4 +34,4 @@ class Photo(Base):
 #     __tablename__ = "tags"
 #     id: Mapped[int] = mapped_column(primary_key=True)
 #     name: Mapped[str] = mapped_column(String(25), nullable=False, unique=True)
-Base.metadata.create_all(bind=engine)
+# Base.metadata.create_all(bind=engine)
